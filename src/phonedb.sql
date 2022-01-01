@@ -1,8 +1,9 @@
+/*
 -- PHONEDB 계정 생성
 create user phonedb identified by phonedb;
 -- 접속권한 부여
 grant resource, connect to phonedb;
-
+*/
 
 
 /***************************
