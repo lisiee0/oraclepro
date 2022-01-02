@@ -115,7 +115,7 @@ public class PhoneDao {
 		    query += " update 	person ";
 		    query += " set 		name= ?, ";
 		    query += " 	   		hp= ?, ";
-		    query += " 	   		company= ?, ";
+		    query += " 	   		company= ? ";
 		    query += " where	person_id= ? ";
 			
 		    pstmt= conn.prepareStatement(query);
