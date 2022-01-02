@@ -1,11 +1,3 @@
-/*
--- PHONEDB 계정 생성
-create user phonedb identified by phonedb;
--- 접속권한 부여
-grant resource, connect to phonedb;
-*/
-
-
 /***************************
 *    초기화  
 ***************************/
@@ -40,7 +32,7 @@ insert into person
 values(seq_person_id.nextval, '정우성', '010-2222-2222', '02-2222-2222');
 
 insert into person
-values(seq_person_id.nextval, '유재석', '010-3333-3333', '02-3333-33333');
+values(seq_person_id.nextval, '유재석', '010-3333-3333', '02-3333-3333');
 
 insert into person
 values(seq_person_id.nextval, '이정재', '010-4444-4444', '02-4444-4444');
@@ -59,10 +51,13 @@ set     name= '이정재',
         company= '02-9999-9999'
 where   person_id= 4;       
 
--- DELETE
+/*
+-- DELETE (서장훈 삭제)
 delete from person
 where       person_id= 5;
+*/ 
 
+-- SELECT
 select * from person;
 
 commit;

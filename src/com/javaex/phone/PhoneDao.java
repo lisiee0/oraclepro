@@ -95,9 +95,20 @@ public class PhoneDao {
 	}
 	
 	
-	public void personUpdate(PhoneVo pv) {
+	public void personUpdate() {
 		
 		this.getConnection();
+		
+		System.out.println("<3.수정>");
+		System.out.print(">번호: ");
+		int personId= sc.nextInt();
+		sc.nextLine(); // 개행문자
+		System.out.print(">이름: ");
+		String name= sc.nextLine();
+		System.out.print(">휴대전화: ");
+		String hp= sc.nextLine();
+		System.out.print(">회사전화: ");
+		String company= sc.nextLine();
 		
 		try {
 			String query= "";
@@ -109,10 +120,10 @@ public class PhoneDao {
 			
 		    pstmt= conn.prepareStatement(query);
 		    
-		    pstmt.setString(1, pv.getName());
-		    pstmt.setString(2, pv.getHp());
-		    pstmt.setString(3, pv.getCompany());
-		    pstmt.setInt(4, pv.getPersonId());
+		    pstmt.setString(1, name);
+		    pstmt.setString(2, hp);
+		    pstmt.setString(3, company);
+		    pstmt.setInt(4, personId);
 		    
 		    int count= pstmt.executeUpdate();
 		    

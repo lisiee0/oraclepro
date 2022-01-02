@@ -24,7 +24,7 @@ public class PhoneApp {
 					break;
 					
 				case 3:
-					// 수정
+					phoneDao.personUpdate();
 					break;
 					
 				case 4:
@@ -46,15 +46,6 @@ public class PhoneApp {
 			}
 		}
 	}
-
-
-
-
-
-
-
-
-
 
 	public static void opening() {
 		System.out.println("*********************************");
