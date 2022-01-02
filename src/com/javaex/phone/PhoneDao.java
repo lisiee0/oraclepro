@@ -29,7 +29,6 @@ public class PhoneDao {
 	private void getConnection() {	
 		try {
 			Class.forName(driver);
-
 			conn = DriverManager.getConnection(url, id, pw);
 			
 		} catch (ClassNotFoundException e) {

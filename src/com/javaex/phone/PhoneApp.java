@@ -4,8 +4,7 @@ public class PhoneApp {
 
 	public static void main(String[] args) {
 		
-		PhoneDao phoneDao= new PhoneDao();
-		
+		PhoneDao phoneDao= new PhoneDao();	
 		boolean action= true;
 		opening();
 		

@@ -26,7 +26,6 @@ public class PhoneVo {
 		this.company = company;
 	}
 
-	
 	// 메소드 gs
 	public int getPersonId() {
 		return personId;
@@ -69,7 +68,5 @@ public class PhoneVo {
 	
 	public void showInfo() {
 		System.out.println(this.getPersonId()+".\t"+this.getName()+"\t"+this.getHp()+"\t"+this.getCompany());
-	}
-	
-	
+	}	
 }
