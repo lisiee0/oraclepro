@@ -1,12 +1,10 @@
 package com.javaex.phone;
 
-import java.util.Scanner;
-
 public class PhoneApp {
 
 	public static void main(String[] args) {
 		
-		Scanner sc= new Scanner(System.in);
+		PhoneDao phoneDao= new PhoneDao();
 		
 		boolean action= true;
 		opening();
@@ -14,15 +12,15 @@ public class PhoneApp {
 		while(action) {
 			menu();
 			
-			int order= sc.nextInt();
+			int order= phoneDao.sc.nextInt();
 			
 			switch(order) {
 				case 1: 
-					// 리스트 불러오기
+					phoneDao.personSelect();
 					break;
 	
 				case 2:
-					// 등록
+					phoneDao.personInsert();
 					break;
 					
 				case 3:
@@ -30,16 +28,16 @@ public class PhoneApp {
 					break;
 					
 				case 4:
-					// 삭제
+					phoneDao.personDelete();
 					break;
 					
 				case 5: 
-					// 검색
-					action= false;
+					phoneDao.personSearch();
 					break;
 				
 				case 6:
-					// 종료
+					closing();
+					action= false;
 					break;
 					
 				default :
@@ -47,8 +45,6 @@ public class PhoneApp {
 					break;
 			}
 		}
-		
-		sc.close();
 	}
 
 
@@ -68,8 +64,8 @@ public class PhoneApp {
 	
 	public static void menu() {
 		System.out.println("");
-		System.out.println("1.리스트  2.등록  3.삭제  4.검색  5.종료");
-		System.out.println("---------------------------------");
+		System.out.println("1.리스트  2.등록  3.수정  4.삭제  5.검색  6.종료");
+		System.out.println("----------------------------------------");
 		System.out.print(">메뉴번호: ");
 	}
 	

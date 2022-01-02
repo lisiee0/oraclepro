@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class PhoneDao {
@@ -14,6 +15,7 @@ public class PhoneDao {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	public Scanner sc= new Scanner(System.in);
 	
 	private String driver= "oracle.jdbc.driver.OracleDriver";
 	private String url= "jdbc:oracle:thin:@localhost:1521:xe";
@@ -55,20 +57,32 @@ public class PhoneDao {
 	}
 	
 	
-	public void personInsert(PhoneVo pv) {
+	public void personInsert() {
+		List<PhoneVo> pList= new ArrayList<PhoneVo>();
 		
 		this.getConnection();
 		
+		sc.nextLine(); // 개행문자
+		System.out.println("<2.등록>");
+		System.out.print(">이름: ");
+		String name= sc.nextLine();
+		System.out.print(">휴대전화: ");
+		String hp= sc.nextLine();
+		System.out.print(">회사전화: ");
+		String company= sc.nextLine();
+		
+		pList.add(new PhoneVo(name, hp, company));
+		
 		try {
-		    String query= "";
+			String query= "";
 		    query += " insert into person ";
 		    query += " values(seq_person_id.nextval, ?, ?, ?) ";
 		    
 		    pstmt= conn.prepareStatement(query);
 		    
-		    pstmt.setString(1, pv.getName()); // name
-		    pstmt.setString(2, pv.getHp()); // hp
-		    pstmt.setString(3, pv.getCompany()); // company		   
+		    pstmt.setString(1, name); // name
+		    pstmt.setString(2, hp); // hp
+		    pstmt.setString(3, company); // company		   
 
 		    int count= pstmt.executeUpdate();	    
 		    		   	    
@@ -86,7 +100,7 @@ public class PhoneDao {
 		this.getConnection();
 		
 		try {
-		    String query= "";
+			String query= "";
 		    query += " update 	person ";
 		    query += " set 		name= ?, ";
 		    query += " 	   		hp= ?, ";
@@ -111,12 +125,16 @@ public class PhoneDao {
 	}
 	
 	
-	public void personDelete(int personId) {
+	public void personDelete() {
 		
 		this.getConnection();
 		
+		System.out.println("<4.삭제>");
+		System.out.print(">번호: ");
+		int personId= sc.nextInt();
+		
 		try {
-		    String query= "";
+			String query= "";
 		    query += " delete from person ";
 		    query += " where	   person_id= ? ";
 			
@@ -140,7 +158,9 @@ public class PhoneDao {
 		List<PhoneVo> pList= new ArrayList<PhoneVo>();
 		
 		this.getConnection();
-
+		
+		System.out.println("<1.리스트>");
+		
 		try {
 			String query= "";
 			query += " select   person_id, "; 
@@ -176,19 +196,24 @@ public class PhoneDao {
 	}
 	
 	
-	public List<PhoneVo> personSearch(String search) {
+	public List<PhoneVo> personSearch() {
 		List<PhoneVo> pList= new ArrayList<PhoneVo>();
 		
 		this.getConnection();
-
-		try {	
+		
+		sc.nextLine(); // 개행문자
+		System.out.println("<5.검색>");
+		System.out.print(">검색어: ");
+		String search= sc.nextLine();
+		
+		try {
 			String query= "";
 			query += " select   person_id, "; 
 			query += "          name, ";
 			query += "          hp, ";
 			query += "          company ";
 			query += " from     person ";
-			query += " where    (name like ? or hp like ? or company like ? ";
+			query += " where    (name like ? or hp like ? or company like ?) ";
 
 			pstmt= conn.prepareStatement(query);
 
