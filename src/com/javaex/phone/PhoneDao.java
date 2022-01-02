@@ -227,10 +227,10 @@ public class PhoneDao {
 			query += " where    (name like ? or hp like ? or company like ?) ";
 
 			pstmt= conn.prepareStatement(query);
-
+			
 			pstmt.setString(1, "%"+search+"%");
-		    pstmt.setString(2, "%"+search+"%");
-		    pstmt.setString(3, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
+			pstmt.setString(3, "%"+search+"%");
 		    
 			rs= pstmt.executeQuery();
 
