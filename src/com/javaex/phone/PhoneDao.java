@@ -112,11 +112,11 @@ public class PhoneDao {
 		
 		try {
 			String query= "";
-		    query += " update 	person ";
-		    query += " set 		name= ?, ";
-		    query += " 	   		hp= ?, ";
-		    query += " 	   		company= ? ";
-		    query += " where	person_id= ? ";
+			query += " update 	person ";
+			query += " set 		name= ?, ";
+			query += " 	   		hp= ?, ";
+			query += " 	   		company= ? ";
+			query += " where	person_id= ? ";
 			
 		    pstmt= conn.prepareStatement(query);
 		    
@@ -146,8 +146,8 @@ public class PhoneDao {
 		
 		try {
 			String query= "";
-		    query += " delete from person ";
-		    query += " where	   person_id= ? ";
+			query += " delete from person ";
+			query += " where	   person_id= ? ";
 			
 		    pstmt= conn.prepareStatement(query);
 		    
