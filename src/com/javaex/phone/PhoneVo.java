@@ -68,9 +68,8 @@ public class PhoneVo {
 	}
 	
 	public void showInfo() {
-		
+		System.out.println(this.getPersonId()+".  "+this.getName()+"\t"+this.getHp()+"\t"+this.getCompany());
 	}
-	
 	
 	
 }

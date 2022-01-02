@@ -136,44 +136,35 @@ public class PhoneDao {
 	}
 	
 	
-	public List<BookVo> bookSelect() {
-		List<BookVo> bookList= new ArrayList<BookVo>();
+	public List<PhoneVo> personSelect() {
+		List<PhoneVo> pList= new ArrayList<PhoneVo>();
 		
 		this.getConnection();
 
 		try {
-		    // 3. SQL문 준비 / 바인딩 / 실행		
 			String query= "";
-			query += " select   book_id, "; 
-			query += "          title, ";
-			query += "          pubs, ";
-			query += "          to_char(pub_date, 'YYYY-MM-DD') pubdate, ";
-			query += "          a.author_id id, ";
-			query += "          author_name, ";
-			query += "          author_desc ";
-			query += " from     book b, author a ";
-			query += " where    b.author_id= a.author_id ";
-			
-			// 문자열 쿼리문으로 만들기
+			query += " select   person_id, "; 
+			query += "          name, ";
+			query += "          hp, ";
+			query += "          company ";
+			query += " from     person ";
+
 			pstmt= conn.prepareStatement(query);
 			
-			// 바인딩--> 생략 ( ? 없음)
-			
-			// 실행 
 			rs= pstmt.executeQuery();
-			
-		    // 4.결과처리
+
             while(rs.next()) {           
-            	int bookId= rs.getInt("book_id"); 
-            	String title= rs.getString("title");
-            	String pubs= rs.getString("pubs");
-            	String pubdate= rs.getString("pubdate");
-            	int authorId= rs.getInt("id");
-            	String authorName= rs.getString("author_name");
-            	String authorDesc= rs.getString("author_desc");
+            	int personId= rs.getInt("person_id"); 
+            	String name= rs.getString("name");
+            	String hp= rs.getString("hp");
+            	String company= rs.getString("company");
             	
-            	BookVo vo= new BookVo(bookId, title, pubs, pubdate, authorId, authorName, authorDesc);
-            	bookList.add(vo);
+            	PhoneVo vo= new PhoneVo(personId, name, hp, company);
+            	pList.add(vo);
+            }
+            
+            for(PhoneVo pv: pList) {
+            	pv.showInfo();
             }
 
 		} catch (SQLException e) {
@@ -181,58 +172,44 @@ public class PhoneDao {
 		}	
 		this.close();
 		
-		return bookList;
+		return pList;
 	}
 	
 	
-	public List<BookVo> bookSearch(String search) {
-		List<BookVo> bookList= new ArrayList<BookVo>();
+	public List<PhoneVo> personSearch(String search) {
+		List<PhoneVo> pList= new ArrayList<PhoneVo>();
 		
 		this.getConnection();
 
-		try {
-		    // 3. SQL문 준비 / 바인딩 / 실행		
+		try {	
 			String query= "";
-			query += " select   book_id, "; 
-			query += "          title, ";
-			query += "          pubs, ";
-			query += "          to_char(pub_date, 'YYYY-MM-DD') pubdate, ";
-			query += "          a.author_id id, ";
-			query += "          author_name, ";
-			query += "          author_desc ";
-			query += " from     book b, author a ";
-			query += " where    b.author_id= a.author_id ";
-			query += " and      (title like ? or pubs like ? or author_name like ?) ";
+			query += " select   person_id, "; 
+			query += "          name, ";
+			query += "          hp, ";
+			query += "          company ";
+			query += " from     person ";
+			query += " where    (name like ? or hp like ? or company like ? ";
 
-			
-			// 문자열 쿼리문으로 만들기
 			pstmt= conn.prepareStatement(query);
-			
-			// 바인딩
+
 			pstmt.setString(1, "%"+search+"%");
 		    pstmt.setString(2, "%"+search+"%");
 		    pstmt.setString(3, "%"+search+"%");
 		    
-			// 실행 
 			rs= pstmt.executeQuery();
-			
-		    // 4.결과처리
+
             while(rs.next()) {           
-            	int bookId= rs.getInt("book_id"); 
-            	String title= rs.getString("title");
-            	String pubs= rs.getString("pubs");
-            	String pubdate= rs.getString("pubdate");
-            	int authorId= rs.getInt("id");
-            	String authorName= rs.getString("author_name");
-            	String authorDesc= rs.getString("author_desc");
+            	int personId= rs.getInt("person_id"); 
+            	String name= rs.getString("name");
+            	String hp= rs.getString("hp");
+            	String company= rs.getString("company");
             	
-            	BookVo vo= new BookVo(bookId, title, pubs, pubdate, authorId, authorName, authorDesc);
-            	bookList.add(vo);
+            	PhoneVo vo= new PhoneVo(personId, name, hp, company);
+            	pList.add(vo);
             }
-            
-            // 출력
-            for(BookVo bv: bookList) {
-            	bv.showInfo();
+
+            for(PhoneVo pv: pList) {
+            	pv.showInfo();
             }
 
 		} catch (SQLException e) {
@@ -240,7 +217,7 @@ public class PhoneDao {
 		}	
 		this.close();
 		
-		return bookList;
+		return pList;
 	}
 }
 
