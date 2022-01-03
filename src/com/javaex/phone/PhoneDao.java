@@ -74,9 +74,9 @@ public class PhoneDao {
 		
 		try {
 			String query= "";
-		    query += " insert into person ";
-		    query += " values(seq_person_id.nextval, ?, ?, ?) ";
-		    
+			query += " insert into person ";
+			query += " values(seq_person_id.nextval, ?, ?, ?) ";
+		
 		    pstmt= conn.prepareStatement(query);
 		    
 		    pstmt.setString(1, name); // name
