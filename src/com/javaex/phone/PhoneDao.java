@@ -164,12 +164,10 @@ public class PhoneDao {
 	}
 	
 	
-	public List<PhoneVo> personSelect() {
+	public List<PhoneVo> getPersonList() {
 		List<PhoneVo> pList= new ArrayList<PhoneVo>();
 		
 		this.getConnection();
-		
-		System.out.println("<1.리스트>");
 		
 		try {
 			String query= "";
@@ -192,10 +190,6 @@ public class PhoneDao {
             	PhoneVo vo= new PhoneVo(personId, name, hp, company);
             	pList.add(vo);
             }
-            
-            for(PhoneVo pv: pList) {
-            	pv.showInfo();
-            }
 
 		} catch (SQLException e) {
 		    System.out.println("error:" + e);
@@ -203,6 +197,14 @@ public class PhoneDao {
 		this.close();
 		
 		return pList;
+	}
+	
+	public void printList() {			
+		System.out.println("<1.리스트>");
+		
+		for(PhoneVo pv: this.getPersonList()) {
+			pv.showInfo();
+		}
 	}
 	
 	

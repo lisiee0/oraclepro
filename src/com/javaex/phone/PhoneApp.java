@@ -15,7 +15,8 @@ public class PhoneApp {
 			
 			switch(order) {
 				case 1: 
-					phoneDao.personSelect();
+					phoneDao.getPersonList();
+					phoneDao.printList();
 					break;
 	
 				case 2:
