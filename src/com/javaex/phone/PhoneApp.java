@@ -1,17 +1,22 @@
 package com.javaex.phone;
 
-public class PhoneApp {
+import java.util.Scanner;
 
+public class PhoneApp {
+	
+	private static Scanner sc= new Scanner(System.in);
+	private static PhoneDao phoneDao= new PhoneDao();
+	
 	public static void main(String[] args) {
-		
-		PhoneDao phoneDao= new PhoneDao();	
+			
 		boolean action= true;
+		
 		opening();
 		
 		while(action) {
 			menu();
 			
-			int order= phoneDao.sc.nextInt();
+			int order= sc.nextInt();
 			
 			switch(order) {
 				case 1: 
@@ -20,19 +25,20 @@ public class PhoneApp {
 					break;
 	
 				case 2:
-					phoneDao.personInsert();
+					enroll();
 					break;
 					
 				case 3:
-					phoneDao.personUpdate();
+					update();
 					break;
 					
 				case 4:
-					phoneDao.personDelete();
+					delete();
 					break;
 					
 				case 5: 
-					phoneDao.personSearch();
+					search();
+					
 					break;
 				
 				case 6:
@@ -45,6 +51,7 @@ public class PhoneApp {
 					break;
 			}
 		}
+		sc.close();
 	}
 
 	public static void opening() {
@@ -69,6 +76,56 @@ public class PhoneApp {
 	
 	public static void reenter() {
 		System.out.println("[다시 입력해 주세요.]");
+	}
+	
+	
+	//////////////////////////////////////////////
+	/////// input
+	//////////////////////
+	
+	public static void enroll() {
+		sc.nextLine(); // 개행문자
+		System.out.println("<2.등록>");
+		System.out.print(">이름: ");
+		String name= sc.nextLine();
+		System.out.print(">휴대전화: ");
+		String hp= sc.nextLine();
+		System.out.print(">회사전화: ");
+		String company= sc.nextLine();
+		
+		PhoneVo pv= new PhoneVo(name, hp, company);
+		phoneDao.personInsert(pv);
+	}
+	
+	public static void update() {
+		System.out.println("<3.수정>");
+		System.out.print(">번호: ");
+		int personId= sc.nextInt();
+		sc.nextLine(); // 개행문자
+		System.out.print(">이름: ");
+		String name= sc.nextLine();
+		System.out.print(">휴대전화: ");
+		String hp= sc.nextLine();
+		System.out.print(">회사전화: ");
+		String company= sc.nextLine();
+		
+		PhoneVo pv= new PhoneVo(personId, name, hp, company);
+		phoneDao.personUpdate(pv);
+	}
+	
+	public static void delete() {
+		System.out.println("<4.삭제>");
+		System.out.print(">번호: ");
+		int personId= sc.nextInt();
+		phoneDao.personDelete(personId);
+	}
+	
+	public static void search() {
+		sc.nextLine(); // 개행문자
+		System.out.println("<5.검색>");
+		System.out.print(">검색어: ");
+		String search= sc.nextLine();
+		phoneDao.personSearch(search);
 	}
 }
 	
